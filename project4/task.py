@@ -92,10 +92,40 @@ def ex_9():
 
     # solve the overdetermined equations using QR decomposition
     Q,R = np.linalg.qr(A)
+    x1 = np.linalg.inv(R) @ (Q.T @ b)
 
     # solve the overdetermined equations using least square
+    x2 = np.linalg.lstsq(A,b)[0]
 
-    # solve the overdetermined equation using inverse function
+    # print the norm from both the approach
+    er_1 = np.linalg.norm(A @ x1 - b)
+    er_2 = np.linalg.norm(A @ x2 - b)
+
+    print(f"Norm for QR is :{er_1} and for least sqr :{er_2}")
+
+def ex_10():
+    # under determined system
+    A = np.random.randn(3,5)
+    b = np.random.randn(3,1)
+
+
+    # compute x using SVD
+    # Ax = b
+    # U,S, Vinv x= b
+    # x = Vinv.T @ Sinv@ U.T @ b
+    U, S, Vinv = np.linalg.svd(A,full_matrices=False)
+    x_1 = Vinv.T @ np.diag(1/S) @ U.T @ b
+
+    # compute x using psudo inverse function
+    x_2 = np.linalg.pinv(A) @ b
+
+    # compute x using least square function
+    x_3 = np.linalg.lstsq(A,b)
+
+    print(f'Solution of SVD :{x_1}')
+    print(f"Solution of psudo inverse :{x_2}")
+    print(f"Solution of least square :{x_3[0]}")
+
 
 if __name__ == "__main__":
-    ex_8()
+    ex_10()
