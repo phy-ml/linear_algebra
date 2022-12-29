@@ -56,7 +56,7 @@ def ex_5():
     # get the diff and scores
     vals = ex_1()
     diff_score = vals['diff'].values
-    print(len(diff_score))
+
     # create blank matrix to store vals
     P = np.zeros((45,10))
     B = np.zeros((45,1))
