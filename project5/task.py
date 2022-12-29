@@ -7,7 +7,7 @@ import pandas as pd
 
 # laod the score and differential files
 score_path = os.path.join(ROOT_DIR, "supplimentary_materials","Scores.mat")
-diff_path = os.path.join(ROOT_DIR, "supplimentary_materials","Differentials.mat")
+
 
 def ex_1():
     # read the score and differential files
