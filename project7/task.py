@@ -36,6 +36,9 @@ def ex_2():
     for i in data['index_small']:
         print(data['movie'][i])
 
+    print('**'*20)
+
+
 def ex_3():
     data = ex_1()
     user_movie_sort = data['user_movies_sort']
@@ -106,18 +109,47 @@ def ex_9():
     for i,j in zip(euclid, p_coef):
         print(f"E-Dist :{i} and P-Coef :{j}")
 
-def ex_10():
-    # get the users movie
-    user_movies = ex_1()['user_movies']
+    # some plotting to visualize the relation of p_coef and eluicidian dist
+    # import matplotlib.pyplot as plt
+    # plt.scatter(p_coef,euclid, color = 'black')
+    # plt.scatter(list(range(len(euclid))), p_coef, color='red')
+    # plt.show()
 
-    index_small = ex_1()['index_small']
+def explain_input():
+    # get base dataset
+    base = ex_1()
+    movie = base['movie']
+    user_movies = base['user_movies']
+    index_small = base['index_small']
+    trial_user = base['trial_user']
+    user_movies_sort = base['user_movies_sort']
 
-    print(user_movies.shape)
+    print(f'Movie array shape {movie.shape}')
+    print(movie)
+    print('---------------------------------------------')
+
+    print(f'user_movies array shape {user_movies.shape}')
+    print(user_movies)
+    print('---------------------------------------------')
+
+    #  'user_movies_sort':user_movies_sort
+    print(f'user_movies_sort array shape {user_movies_sort.shape}')
+    print(user_movies_sort)
+    print('---------------------------------------------')
+
+    print(f'index_small array shape {index_small.shape}')
     print(index_small)
+    print('---------------------------------------------')
 
-    # get a list of movies rated by the users
+    print(f'trial_user array shape {trial_user.shape}')
+    print(trial_user)
+    print('---------------------------------------------')
 
+def ex_10():
+    # need to work on exercises 10-14 >> incomplete
+    pass
 
 if __name__ == "__main__":
     # print(ex_1())
-    ex_10()
+    explain_input()
+    ex_9()
