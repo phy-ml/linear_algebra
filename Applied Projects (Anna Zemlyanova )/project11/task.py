@@ -6,7 +6,7 @@ import os
 # read and store the images as matrix
 
 def ex_1():
-    db_path = r"E:\PycharmProjects\linear_algebra\supplimentary_materials\database"
+    db_path = r"/Applied Projects (Anna Zemlyanova )/supplimentary_materials/database"
     # fig, axs = plt.subplots(ncols=6, nrows=6)
     blank_lst = []
 

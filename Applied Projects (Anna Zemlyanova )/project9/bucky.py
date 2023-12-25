@@ -11,7 +11,7 @@ def buckyball_vertices():
     return data
 
 def adj_mat():
-    data = np.loadtxt("adj_mat.txt",dtype=int, delimiter=',')
+    data = np.loadtxt("adj_mat.txt", dtype=int, delimiter=',')
 
     # create a 60 by 60 matrix
     adj = np.zeros((60,60))
