@@ -79,18 +79,114 @@ def ex_5():
     # print(eigen_data.shape)
     mean_mat = ex_2()
     # print(mean_mat.shape)
-    m,n = 112, 92
+    # m,n = 112, 92
+    #
+    # fig, axs = plt.subplots(ncols=5, nrows=6)
+    # axs = axs.ravel()
+    #
+    # for i in range(30):
+    #     eigen_face = (eigen_data[:,i].reshape(-1,1) + mean_mat).reshape(m,n)
+    #
+    #     axs[i].imshow(eigen_face)
+    #
+    # plt.show
 
-    fig, axs = plt.subplots(ncols=5, nrows=6)
+    return eigen_data
+
+
+def ex_6():
+    eigen_val, eigen_vec = ex_4()
+    img_mat = ex_1()
+    std_img = ex_3()
+
+    # p_mat = std_img.T @ std_img
+
+    # check if the p_mat is symmetric
+    # print(np.allclose(p_mat, p_mat.T, rtol=1e-05, atol=1e-08))
+
+    # check if the eigen vectors are orthogonal
+    # orth_eign_vec = eigen_vec.T @ eigen_vec
+    # # create an identify matrix
+    # id_matrix = np.identity(len(orth_eign_vec))
+    # print(np.allclose(orth_eign_vec, id_matrix, rtol=1e-05, atol=1e-08))
+
+    # check if the product of eigen vector and std_matrix is diagonal matrix
+    eigen_data = std_img @ eigen_vec
+    product = eigen_data.T @ eigen_data
+
+    # check if the product is a diagonal matrix or not
+    # print(product.diagonal())
+    check_mat = np.diag(product.diagonal())
+    print(np.allclose(product, check_mat, rtol=1e-05, atol=1e-05))
+
+
+def ex_7():
+    # recognition of an altered image (in sunglasses)
+
+    # read the altered-image
+    alt_img = plt.imread("E:\PycharmProjects\linear_algebra\supplimentary_materials\database\person30altered1.pgm").reshape(-1,1)
+
+    # plt.imshow(alt_img)
+    # plt.show()
+
+    # load computations from pervious steps
+    std_img = ex_3()
+    eigen_val, eigen_vec = ex_4()
+
+    eigen_data = std_img @ eigen_vec
+    mean_mat = ex_2()
+
+    product = eigen_data.T @ eigen_data
+
+    diff = mean_mat - alt_img
+    w = eigen_data.T @ diff
+    w = (w.ravel()/np.diag(product)).reshape(-1,1)
+
+    u_approx = (eigen_data@w + mean_mat).reshape(112,92)
+    u_original = alt_img.reshape(112,92)
+
+    fig, axs = plt.subplots(2,1)
     axs = axs.ravel()
 
-    for i in range(30):
-        eigen_face = (eigen_data[:,i].reshape(-1,1) + mean_mat).reshape(m,n)
+    axs[0].imshow(u_approx)
+    axs[1].imshow(u_original)
 
-        axs[i].imshow(eigen_face)
+    plt.show()
+
+def ex_8():
+    # read the altered-image
+    alt_img = plt.imread(
+        "E:\PycharmProjects\linear_algebra\supplimentary_materials\database\person30altered2.pgm").reshape(-1, 1)
+
+    # plt.imshow(alt_img)
+    # plt.show()
+
+    # load computations from pervious steps
+    std_img = ex_3()
+    eigen_val, eigen_vec = ex_4()
+
+    eigen_data = std_img @ eigen_vec
+    mean_mat = ex_2()
+
+    product = eigen_data.T @ eigen_data
+
+    diff = mean_mat - alt_img
+    w = eigen_data.T @ diff
+    w = (w.ravel() / np.diag(product)).reshape(-1, 1)
+
+    u_approx = (eigen_data @ w + mean_mat).reshape(112, 92)
+    u_original = alt_img.reshape(112, 92)
+
+    fig, axs = plt.subplots(2, 1)
+    axs = axs.ravel()
+
+    axs[0].imshow(u_approx)
+    axs[1].imshow(u_original)
 
     plt.show()
 
 
+
+
 if __name__ == "__main__":
-    ex_5()
+    ex_8()
